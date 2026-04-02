@@ -15,10 +15,8 @@ contract FixedVault is ReentrancyGuard {
 
         require(balances[msg.sender] >= amount, "Not enough balance");
 
-        // ✅ Effects first
         balances[msg.sender] -= amount;
 
-        // ✅ Interaction after
         (bool sent, ) = msg.sender.call{value: amount}("");
         require(sent, "Failed");
     }
